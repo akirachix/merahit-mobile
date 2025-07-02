@@ -80,7 +80,7 @@ fun WelcomeScreen(
                     .weight(1f)
                     .fillMaxHeight(0.40f)
                     .padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally // To center the text
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.peas),
