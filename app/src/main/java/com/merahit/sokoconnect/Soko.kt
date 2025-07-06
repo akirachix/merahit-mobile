@@ -146,7 +146,7 @@ fun WelcomeScreen(
             color = Color(0xFF658F3D),
             fontWeight = FontWeight.Bold
         )
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = { if (screenNumber>=1){
             navController.navigate("screen${screenNumber+1}")
         }},  colors = ButtonDefaults.buttonColors(
@@ -154,6 +154,7 @@ fun WelcomeScreen(
             contentColor = Color.White    )) {
             Text(text="Get Started", modifier = Modifier.padding(40.dp,8.dp))
         }
+        Spacer(modifier = Modifier.height(32.dp))
     }
 
 }
@@ -193,7 +194,7 @@ fun SignUp(
             contentDescription = "a picture od soko connect logo",
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.18f)
+                .height(100.dp)
                 .padding(0.dp),
             contentScale = ContentScale.Fit
         )
@@ -373,15 +374,6 @@ fun SignUp(
                     if (screenNumber >= 1 && fullname.isNotEmpty() && phoneNumber.isNotEmpty() && password.isNotEmpty()&& checked){
                         navController.navigate("screen${screenNumber + 5}")
                     }
-//                    if (fullname.isEmpty()&& phoneNumber.isEmpty()&& password.isEmpty()){
-//
-//                        Text(
-//
-//                            text = "Passwords do not match",
-//                            color = Color.Red,
-//                            modifier = Modifier.padding(start = 16.dp)
-//                        )
-//                    }
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFF658F3D),
@@ -434,6 +426,7 @@ fun SignUp(
                     }
             }
         )
+        Spacer(modifier = Modifier.height(60.dp))
 
     }
 
