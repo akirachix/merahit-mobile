@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import com.merahit.sokoconnect.R
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
@@ -36,6 +37,12 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Checkbox
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 
 
 var PersonalizedFont = FontFamily(
@@ -52,6 +59,7 @@ fun WelcomeScreen(
         modifier = Modifier.run { fillMaxSize().padding(16.dp) },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top,
+
 
         ) {
         Image(
@@ -138,7 +146,7 @@ fun WelcomeScreen(
             color = Color(0xFF658F3D),
             fontWeight = FontWeight.Bold
         )
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(20.dp))
         Button(onClick = { if (screenNumber>=1){
             navController.navigate("screen${screenNumber+1}")
         }},  colors = ButtonDefaults.buttonColors(
@@ -157,22 +165,25 @@ fun SignUp(
     imageId: Int,
     welcomeMessage:String
 ) {
+    val scrollState = rememberScrollState()
     var fullname by remember { mutableStateOf("") }
+    var location by remember { mutableStateOf("") }
     var phoneNumber by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
     val passwordsMatch = password == confirmPassword
     val modifier = Modifier
+    var checked by remember { mutableStateOf(false) }
 
     Column(
-        modifier = Modifier.run { fillMaxSize() },
+        modifier = Modifier.run { fillMaxSize().verticalScroll(scrollState) },
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Top,
 
         ) {
         Image(
             painter = painterResource(id = imageId), contentDescription = "a picture of vegetables",
-            modifier = Modifier.size(140.dp)
+            modifier = Modifier.size(120.dp)
                 .padding(0.dp),
             contentScale = ContentScale.Fit
 
@@ -217,7 +228,11 @@ fun SignUp(
             ),
             placeholder = {
                 Text("Enter your full name")
-            }
+            },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Done
+                    )
         )
         Text(
             text = "Phone Number",
@@ -241,6 +256,33 @@ fun SignUp(
             ),
             placeholder = {
                 Text("Enter your phone number")
+            },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Phone
+            )
+        )
+        Text(
+            text = "Enter location",
+            modifier = Modifier.padding(24.dp, 16.dp, 0.dp, 0.dp),
+            fontSize = 16.sp,
+            fontFamily = PersonalizedFont,
+            textAlign = TextAlign.Center,
+        )
+        TextField(
+            value = location,
+            onValueChange = { location = it },
+            modifier = modifier.fillMaxWidth()
+                .padding(16.dp, 0.dp, 16.dp, 0.dp)
+                .border(
+                    width = 1.dp,
+                    color = Color.Black,
+                ),
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White
+            ),
+            placeholder = {
+                Text("Enter your location")
             }
         )
         Text(
@@ -303,7 +345,24 @@ fun SignUp(
                 modifier = Modifier.padding(start = 16.dp)
             )
         }
-        Spacer(modifier = Modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(10.dp))
+        Row(
+            modifier = Modifier,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Checkbox(   modifier = Modifier.padding(start = 40.dp),
+                checked = checked,
+                onCheckedChange = { checked = it }
+            )
+            Text(
+                text = "Agree to the Terms and Conditions",
+                modifier = Modifier.padding( top = 16.dp),
+                fontSize = 12.sp,
+                fontFamily = PersonalizedFont,
+                textAlign = TextAlign.Center,
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -311,7 +370,7 @@ fun SignUp(
         ) {
             Button(
                 onClick = {
-                    if (screenNumber >= 1 && fullname.isNotEmpty() && phoneNumber.isNotEmpty() && password.isNotEmpty()) {
+                    if (screenNumber >= 1 && fullname.isNotEmpty() && phoneNumber.isNotEmpty() && password.isNotEmpty()&& checked){
                         navController.navigate("screen${screenNumber + 5}")
                     }
 //                    if (fullname.isEmpty()&& phoneNumber.isEmpty()&& password.isEmpty()){
@@ -452,7 +511,10 @@ fun SignIn(
             ),
             placeholder = {
                 Text("Enter your phone number")
-            }
+            },
+                    keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Phone
+                    )
         )
         Text(
             text = "Password",
@@ -643,8 +705,11 @@ fun ForgotPassword(
                 unfocusedContainerColor = Color(0xFFC0F290),
             ),
             placeholder = {
-                Text("Enter your phone number")
-            }
+                Text("+254 |")
+            },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Phone
+            )
         )
         Spacer(modifier = Modifier.height(120.dp))
         Row(
@@ -742,7 +807,10 @@ fun VerifyYourNumber(
                 ),
                 placeholder = {
                     Text("2")
-                }
+                },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number
+                )
             )
             TextField(
                 value = pin2,
@@ -760,7 +828,10 @@ fun VerifyYourNumber(
                 ),
                 placeholder = {
                     Text("0")
-                }
+                },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number
+                )
             )
             TextField(
                 value = pin3,
@@ -798,7 +869,10 @@ fun VerifyYourNumber(
                     ),
                 placeholder = {
                     Text("_")
-                }
+                },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number
+                )
             )
         }
         Spacer(modifier = Modifier.height(20.dp))
@@ -992,7 +1066,7 @@ fun ResetYourPassword(
                     )
                 ) {
                     Text(
-                        text = "Reset",
+                        text = "Reset Password",
                         modifier = Modifier.padding(56.dp, 8.dp),
                         fontSize = 12.sp,
                     )
@@ -1021,12 +1095,7 @@ fun ResetYourPassword(
                         modifier = Modifier.padding(70.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text(
-                            text = "Successful!",
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF658F3D)
-                        )
+
                         Image(
                             painter = painterResource(id = R.drawable.verified),
                             contentDescription = "a picture of verification",
@@ -1036,12 +1105,19 @@ fun ResetYourPassword(
                                 .padding(0.dp),
                             contentScale = ContentScale.Fit
                         )
+                        Text(
+                            text = "Success!",
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF658F3D)
+                        )
 
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = "Your password was successfully changed",
                             fontSize = 16.sp,
-                            color = Color.Black
+                            color = Color.Black,
+                            textAlign = TextAlign.Center,
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         Button(onClick = {
