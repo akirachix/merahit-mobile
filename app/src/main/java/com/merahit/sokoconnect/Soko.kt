@@ -41,6 +41,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Checkbox
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 
@@ -152,7 +154,9 @@ fun WelcomeScreen(
         }},  colors = ButtonDefaults.buttonColors(
             containerColor = Color(0xFF658F3D),
             contentColor = Color.White    )) {
-            Text(text="Get Started", modifier = Modifier.padding(40.dp,8.dp))
+            Text(text="Get Started", modifier = Modifier.padding(40.dp,8.dp),
+                fontFamily = PersonalizedFont,
+                fontSize = 16.sp)
         }
         Spacer(modifier = Modifier.height(32.dp))
     }
@@ -228,12 +232,15 @@ fun SignUp(
                 unfocusedContainerColor = Color.White
             ),
             placeholder = {
-                Text("Enter your full name")
+                Text("Enter your full name",   style = TextStyle(
+                    fontFamily = PersonalizedFont
+
+                ))
             },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
                         imeAction = ImeAction.Done
-                    )
+                    ),
         )
         Text(
             text = "Phone Number",
@@ -255,8 +262,13 @@ fun SignUp(
                 focusedContainerColor = Color.White,
                 unfocusedContainerColor = Color.White
             ),
+
             placeholder = {
-                Text("Enter your phone number")
+                Text("Enter your phone number",
+                        style = TextStyle(
+                        fontFamily = PersonalizedFont
+
+                        ))
             },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Phone
@@ -281,9 +293,14 @@ fun SignUp(
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.White,
                 unfocusedContainerColor = Color.White
-            ),
-            placeholder = {
-                Text("Enter your location")
+            ),   placeholder = {
+                Text(
+                    "Enter your location",
+                    style = TextStyle(
+                        fontFamily = PersonalizedFont
+
+                    )
+                )
             }
         )
         Text(
@@ -307,7 +324,10 @@ fun SignUp(
                 unfocusedContainerColor = Color.White
             ),
             placeholder = {
-                Text("Create a password")
+                Text("Create a password",   style = TextStyle(
+                    fontFamily = PersonalizedFont
+
+                ))
             },
             visualTransformation = PasswordVisualTransformation()
 
@@ -334,7 +354,10 @@ fun SignUp(
                 focusedContainerColor = Color.White,
                 unfocusedContainerColor = Color.White
             ),
-            placeholder = { Text("Confirm password") },
+            placeholder = { Text("Confirm password",   style = TextStyle(
+                fontFamily = PersonalizedFont
+
+            )) },
             visualTransformation = PasswordVisualTransformation(),
             isError = !passwordsMatch && confirmPassword.isNotEmpty()
         )
@@ -380,7 +403,10 @@ fun SignUp(
                     contentColor = Color.White
                 )
             ) {
-                Text(text = "Sign up", modifier = Modifier.padding(56.dp, 8.dp))
+                Text(text = "Sign up", modifier = Modifier.padding(56.dp, 8.dp),   style = TextStyle(
+                    fontFamily = PersonalizedFont, fontSize = 16.sp
+
+                ))
             }
         }
         ClickableText(
@@ -390,7 +416,10 @@ fun SignUp(
                 withStyle(
                     style = SpanStyle(
                         color = Color(0xFF658F3D),
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                                fontFamily = PersonalizedFont
+
+
                     )
                 ) {
                     append("Sign in")
@@ -413,7 +442,8 @@ fun SignUp(
                     withStyle(
                         style = SpanStyle(
                             color = Color(0xFF658F3D),
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
+                                    fontFamily = PersonalizedFont
                         )
                     ) {
                         append("Sign in")
@@ -503,7 +533,10 @@ fun SignIn(
                 unfocusedContainerColor = Color.White
             ),
             placeholder = {
-                Text("Enter your phone number")
+                Text("Enter your phone number",   style = TextStyle(
+                    fontFamily = PersonalizedFont
+
+                ))
             },
                     keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Phone
@@ -530,7 +563,10 @@ fun SignIn(
                 unfocusedContainerColor = Color.White
             ),
             placeholder = {
-                Text("Enter your password")
+                Text("Enter your password",    style = TextStyle(
+                    fontFamily = PersonalizedFont
+
+                ))
             },
             visualTransformation = PasswordVisualTransformation()
 
@@ -564,7 +600,10 @@ fun SignIn(
                     contentColor = Color.White
                 )
             ) {
-                Text(text = "Sign In", modifier = Modifier.padding(56.dp, 8.dp),fontSize = 12.sp,)
+                Text(text = "Sign In", modifier = Modifier.padding(56.dp, 8.dp), style = TextStyle(
+                    fontFamily = PersonalizedFont, fontSize = 16.sp
+
+                ))
             }
         }
         ClickableText(
@@ -574,7 +613,10 @@ fun SignIn(
                 withStyle(
                     style = SpanStyle(
                         color = Color(0xFF658F3D),
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                            fontFamily = PersonalizedFont
+
+
                     )
                 ) {
                     append("Sign up")
@@ -597,7 +639,9 @@ fun SignIn(
                     withStyle(
                         style = SpanStyle(
                             color = Color(0xFF658F3D),
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
+                                fontFamily = PersonalizedFont
+
                         )
                     ) {
                         append("Sign UP")
@@ -698,7 +742,10 @@ fun ForgotPassword(
                 unfocusedContainerColor = Color(0xFFC0F290),
             ),
             placeholder = {
-                Text("+254 |")
+                Text("+254 |",   style = TextStyle(
+                    fontFamily = PersonalizedFont
+
+                ))
             },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Phone
@@ -720,7 +767,10 @@ fun ForgotPassword(
                     contentColor = Color.White
                 )
             ) {
-                Text(text = "Send", modifier = Modifier.padding(56.dp, 8.dp),fontSize = 12.sp,)
+                Text(text = "Send", modifier = Modifier.padding(56.dp, 8.dp), style = TextStyle(
+                    fontFamily = PersonalizedFont, fontSize = 16.sp
+
+                ))
             }
         }
     }
@@ -799,7 +849,10 @@ fun VerifyYourNumber(
                     unfocusedContainerColor = Color(0xFFC0F290),
                 ),
                 placeholder = {
-                    Text("2")
+                    Text("2",   style = TextStyle(
+                        fontFamily = PersonalizedFont
+
+                    ))
                 },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number
@@ -820,7 +873,10 @@ fun VerifyYourNumber(
                     unfocusedContainerColor = Color(0xFFC0F290),
                 ),
                 placeholder = {
-                    Text("0")
+                    Text("0",   style = TextStyle(
+                        fontFamily = PersonalizedFont
+
+                    ))
                 },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number
@@ -905,7 +961,10 @@ fun VerifyYourNumber(
                         contentColor = Color.White
                     )
                 ) {
-                    Text(text = "Verify", modifier = Modifier.padding(56.dp, 8.dp),fontSize = 12.sp,)
+                    Text(text = "Verify", modifier = Modifier.padding(56.dp, 8.dp),  style = TextStyle(
+                        fontFamily = PersonalizedFont, fontSize = 16.sp
+
+                    ))
                 }
             }
         }
@@ -999,7 +1058,10 @@ fun ResetYourPassword(
                     disabledIndicatorColor = Color.Transparent
                 ),
                 placeholder = {
-                    Text("Enter your new password")
+                    Text("Enter your new password",   style = TextStyle(
+                        fontFamily = PersonalizedFont
+
+                    ))
                 },
                 visualTransformation = PasswordVisualTransformation()
             )
@@ -1027,7 +1089,10 @@ fun ResetYourPassword(
                     disabledIndicatorColor = Color.Transparent
                 ),
                 placeholder = {
-                    Text("Confirm your new password")
+                    Text("Confirm your new password",   style = TextStyle(
+                        fontFamily = PersonalizedFont
+
+                    ))
                 },
                 visualTransformation = PasswordVisualTransformation(),
                 isError = !passwordsMatch && confirmPassword.isNotEmpty()
@@ -1036,6 +1101,7 @@ fun ResetYourPassword(
             if (!passwordsMatch && confirmPassword.isNotEmpty()) {
                 Text(
                     text = "Passwords do not match",
+                        fontFamily = PersonalizedFont,
                     color = Color.Red,
                     modifier = Modifier.padding(start = 16.dp)
                 )
@@ -1060,8 +1126,9 @@ fun ResetYourPassword(
                 ) {
                     Text(
                         text = "Reset Password",
+                            fontFamily = PersonalizedFont,
                         modifier = Modifier.padding(56.dp, 8.dp),
-                        fontSize = 12.sp,
+                        fontSize = 16.sp
                     )
                 }
             }
@@ -1100,6 +1167,7 @@ fun ResetYourPassword(
                         )
                         Text(
                             text = "Success!",
+                                fontFamily = PersonalizedFont,
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color(0xFF658F3D)
@@ -1111,6 +1179,8 @@ fun ResetYourPassword(
                             fontSize = 16.sp,
                             color = Color.Black,
                             textAlign = TextAlign.Center,
+                                fontFamily = PersonalizedFont
+
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         Button(onClick = {
@@ -1121,7 +1191,10 @@ fun ResetYourPassword(
                                 containerColor = Color(0xFF658F3D),
                                 contentColor = Color.White
                             )) {
-                            Text("Back To Home")
+                            Text("Back To Home",   style = TextStyle(
+                                fontFamily = PersonalizedFont, fontSize = 16.sp
+
+                            ))
                         }
                     }
                 }
