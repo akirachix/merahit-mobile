@@ -40,11 +40,18 @@ import androidx.navigation.NavController
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
+
 
 
 var PersonalizedFont = FontFamily(
@@ -847,6 +854,9 @@ fun VerifyYourNumber(
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor =Color(0xFFC0F290),
                     unfocusedContainerColor = Color(0xFFC0F290),
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent
+
                 ),
                 placeholder = {
                     Text("2",   style = TextStyle(
@@ -871,6 +881,8 @@ fun VerifyYourNumber(
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor =Color(0xFFC0F290),
                     unfocusedContainerColor = Color(0xFFC0F290),
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent
                 ),
                 placeholder = {
                     Text("0",   style = TextStyle(
@@ -895,6 +907,8 @@ fun VerifyYourNumber(
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor =Color(0xFFC0F290),
                     unfocusedContainerColor = Color(0xFFC0F290),
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent
                 ),
                 placeholder = {
                     Text("_")
@@ -914,6 +928,8 @@ fun VerifyYourNumber(
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor =Color(0xFFC0F290),
                     unfocusedContainerColor = Color(0xFFC0F290),
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent
 
                     ),
                 placeholder = {
@@ -1021,7 +1037,12 @@ fun ResetYourPassword(
                 fontWeight = FontWeight.Bold
             )
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(10.dp))
+
+
+            var passwordVisible by remember { mutableStateOf(false) }
+            var confirmPasswordVisible by remember { mutableStateOf(false) }
+
 
             Text(
                 text = "Please enter your new password",
@@ -1034,15 +1055,6 @@ fun ResetYourPassword(
             )
 
             Spacer(modifier = Modifier.height(40.dp))
-
-            Text(
-                text = "Create password",
-                modifier = Modifier.padding(24.dp, 16.dp, 0.dp, 0.dp),
-                fontSize = 16.sp,
-                fontFamily = PersonalizedFont,
-                textAlign = TextAlign.Center,
-            )
-
             TextField(
                 value = password,
                 onValueChange = { password = it },
@@ -1058,21 +1070,21 @@ fun ResetYourPassword(
                     disabledIndicatorColor = Color.Transparent
                 ),
                 placeholder = {
-                    Text("Enter your new password",   style = TextStyle(
-                        fontFamily = PersonalizedFont
-
-                    ))
+                    Text(
+                        "Enter your new password",
+                        style = TextStyle(fontFamily = PersonalizedFont)
+                    )
                 },
-                visualTransformation = PasswordVisualTransformation()
+                visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                trailingIcon = {
+                    val image = if (passwordVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
+                    IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                        Icon(imageVector = image, contentDescription = if (passwordVisible) "Hide password" else "Show password")
+                    }
+                }
             )
 
-            Text(
-                text = "Confirm password",
-                modifier = Modifier.padding(24.dp, 16.dp, 0.dp, 0.dp),
-                fontSize = 16.sp,
-                fontFamily = PersonalizedFont,
-                textAlign = TextAlign.Center,
-            )
+            Spacer(modifier = Modifier.height(20.dp))
 
             TextField(
                 value = confirmPassword,
@@ -1089,23 +1101,23 @@ fun ResetYourPassword(
                     disabledIndicatorColor = Color.Transparent
                 ),
                 placeholder = {
-                    Text("Confirm your new password",   style = TextStyle(
-                        fontFamily = PersonalizedFont
-
-                    ))
+                    Text(
+                        "Confirm your new password",
+                        style = TextStyle(fontFamily = PersonalizedFont)
+                    )
                 },
-                visualTransformation = PasswordVisualTransformation(),
+                visualTransformation = if (confirmPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                trailingIcon = {
+                    val image = if (confirmPasswordVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
+                    IconButton(onClick = { confirmPasswordVisible = !confirmPasswordVisible }) {
+                        Icon(imageVector = image, contentDescription = if (confirmPasswordVisible) "Hide password" else "Show password")
+                    }
+                },
                 isError = !passwordsMatch && confirmPassword.isNotEmpty()
             )
 
-            if (!passwordsMatch && confirmPassword.isNotEmpty()) {
-                Text(
-                    text = "Passwords do not match",
-                        fontFamily = PersonalizedFont,
-                    color = Color.Red,
-                    modifier = Modifier.padding(start = 16.dp)
-                )
-            }
+
+
 
             Spacer(modifier = Modifier.height(170.dp))
 
