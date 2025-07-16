@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "SokoConnect"
 include(":app")
- 
+include(":app")
