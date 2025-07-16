@@ -1,4 +1,4 @@
-package com.merahit.sokoconnect
+package com.merahit.sokoconnect;
 
 
 import androidx.compose.runtime.Composable
